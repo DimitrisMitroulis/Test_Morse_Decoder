@@ -1,0 +1,2 @@
+rootProject.name = "Test_Morse_Decoder"
+include ':app'
