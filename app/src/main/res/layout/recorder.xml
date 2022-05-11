@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/RecordBtn"
+        android:id="@+id/RecordStopBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Record"
@@ -25,11 +25,11 @@
         android:text="Stop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/RecordBtn"
+        app:layout_constraintStart_toEndOf="@+id/RecordStopBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/PlayBtn"
+        android:id="@+id/PlayStopBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"

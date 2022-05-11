@@ -1,9 +1,13 @@
 package com.example.test_morse_decoder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,12 +24,18 @@ public class MainActivity extends AppCompatActivity {
     private Button SpaceBtn;
     private Button GoToRecorderBtn;
 
-
+    private static int MICROPHONE_PERMISSION_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //checks if device has mic, then if the app doesn't have access to it, asks permission.[WORKING]
+        if(isMicPresent()){
+            requestMicrophonePermission();
+        }
+
         txt = (TextView) findViewById(R.id.txt);
         result = (TextView) findViewById(R.id.result);
         toMorseBtn = (Button) findViewById(R.id.ToMorseBtn);
@@ -91,20 +101,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    private boolean isMicPresent() {
+        //returns true if device has microphone.
+
+        return (this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MICROPHONE));
+    }
+
+
+    private void requestMicrophonePermission() {
+        //if permission for microphone is not given, it requests it.
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, MICROPHONE_PERMISSION_CODE);
+        }
+    }
+
+    //opens recorder activity
     private void openRecorder() {
         Intent intent = new Intent(this, Recorder.class);
         startActivity(intent);
     }
 
-    public void btnRecordPresse(View v){
 
-    }
-
-    public void btnStopPresse(View v){
-
-    }
-
-    public void btnPlayPresse(View v){
-
-    }
 }
